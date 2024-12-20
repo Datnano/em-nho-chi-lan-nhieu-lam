@@ -469,54 +469,47 @@
 
     <script>
         const thankYouMessages = [
-            "Em sẽ ôm chặt lấy chị, chị Lan! 🥰",
-            "Chị Lan, dù thế nào em cũng không buông đâu! 🤗",
-            "Cảm ơn chị Lan, em chỉ muốn giữ chị mãi bên em! 💖",
-            "Chị Lan, em sẽ không để ai cướp mất chị đâu! ❤️",
-            "Chị Lan là của em, và em sẽ bảo vệ điều đó! ✨",
-            "Em sẽ ôm chị thật lâu, đừng rời xa em nhé, chị Lan! 💕",
-            "Chị Lan, em hứa sẽ luôn giữ chị trong vòng tay em! 😍",
-        ];
+		    "Em sẽ ôm chặt lấy chị, chị Lan! 🥰",
+		    "Chị Lan, dù thế nào em cũng không buông đâu! 🤗",
+		    "Cảm ơn chị Lan, em chỉ muốn giữ chị mãi bên em! 💖",
+		];
 
-        const sadMessages = [
-            "Chị Lan ơi, em có hơi buồn một chút... nhưng trời lạnh lắm, cho em ôm chị được không? 🥺",
-            "Em biết là chị Lan chưa đồng ý, nhưng em thật sự nhớ chị. 😔",
-            "Dù chị Lan không chọn em, em vẫn thương chị nhiều lắm. 💔",
-            "Lạnh lắm, chị Lan... em chỉ muốn được ở cạnh chị lúc này thôi. 🥹",
-            "Chị Lan à, em không trách chị đâu, nhưng tim em hơi đau một chút. 🥺",
-            "Nếu một ngày nào đó chị đổi ý, em vẫn sẽ luôn ở đây chờ chị, chị Lan. 😢",
-            "Em không cần gì nhiều, chỉ cần chị Lan cho em cơ hội nhỏ thôi. 😞",
-        ];
+		const motivationMessages = [
+		    "Chị Lan ơi, em có hơi buồn một chút...",
+    "Dù chị Lan không chọn em, em vẫn thương chị nhiều lắm. 💔",
+		];		
 
-        // Hàm lấy câu ngẫu nhiên
-        function getRandomMessage(messages) {
-            return messages[Math.floor(Math.random() * messages.length)];
-        }
-
-        const yesButton = document.getElementById('yesButton');
-        const noButton = document.getElementById('noButton');
-        const thankYouMessage = document.getElementById('thankYouMessage');
-        const motivationMessage = document.getElementById('motivationMessage');
-        const soundtrack = document.getElementById('soundtrack');
-
-        yesButton.addEventListener('click', () => {
-            thankYouMessage.textContent = getRandomMessage(thankYouMessages); // Đổi nội dung câu cảm ơn
-            thankYouMessage.classList.add('show'); // Thêm class để hiển thị
-            soundtrack.play(); // Chạy lại âm thanh khi nhấn nút "Đồng ý"
-            setTimeout(() => {
-                thankYouMessage.classList.remove('show'); // Loại bỏ class để ẩn
-            }, 5000); // Ẩn sau 5 giây
-        });
-
-        noButton.addEventListener('click', () => {
-            noButton.style.transform = `translateX(${Math.random() * 200 - 100}px) translateY(${Math.random() * 200 - 100}px)`;
-            motivationMessage.textContent = getRandomMessage(sadMessages); // Đổi nội dung câu động viên
-            motivationMessage.classList.add('show'); // Thêm class để hiển thị
-            soundtrack.pause();  // Dừng âm thanh khi nhấn nút "Không"
-            setTimeout(() => {
-                motivationMessage.classList.remove('show'); // Loại bỏ class để ẩn
-            }, 5000); // Ẩn sau 5 giây
-        });
+		function getRandomMessage(messages) {
+		    if (!messages || messages.length === 0) return "Không có tin nhắn nào.";
+		    return messages[Math.floor(Math.random() * messages.length)];
+		}
+		
+		const yesButton = document.getElementById('yesButton');
+		const noButton = document.getElementById('noButton');
+		const thankYouMessage = document.getElementById('thankYouMessage');
+		const motivationText = document.getElementById('motivationMessage');
+		const soundtrack = document.getElementById('soundtrack');
+		
+		yesButton.addEventListener('click', () => {
+		    thankYouMessage.textContent = getRandomMessage(thankYouMessages);
+		    thankYouMessage.classList.add('show');
+		    soundtrack.play();
+		    setTimeout(() => {
+		        thankYouMessage.classList.remove('show'); // Xóa class sau 5 giây
+		        console.log("Class 'show' đã bị xóa"); // Ghi log kiểm tra
+		    }, 5000);
+		});
+		
+		noButton.addEventListener('click', () => {
+		    noButton.style.transform = `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px)`;
+		    motivationText.textContent = getRandomMessage(motivationMessages);
+		    motivationText.classList.add('show');
+		    soundtrack.pause();
+		    setTimeout(() => {
+		        motivationText.classList.remove('show'); // Xóa class sau 5 giây
+		        console.log("Class 'show' đã bị xóa"); // Ghi log kiểm tra
+		    }, 5000);
+		});
 
         // Thêm sự kiện click cho nút Không để zoom lên tạm thời
         noButton.addEventListener('mousedown', () => {
